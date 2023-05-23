@@ -43,11 +43,11 @@ manim-Chemistry is a manim plugin designed to make chemistry animations easier.
 
 To my knowledge, there is only another plugin related to chemistry called [chanim](https://github.com/kilacoda/chanim) that aims to import to manim the chemfig package (and does an amazing job!).
 
-The philosophy of manim-Chemistry goes into a different direction: manim-Chemistry tries to use the manim tools in combination with [.mol](https://en.wikipedia.org/wiki/Chemical_table_file) files and [.csv](https://en.wikipedia.org/wiki/Comma-separated_values) databases useful basic classes to create beatufil chemistry related animations such as a Periodic Table or 2d and 3d chemical structures.
+The philosophy of manim-Chemistry goes into a different direction: manim-Chemistry tries to use the manim tools in combination with [.mol](https://en.wikipedia.org/wiki/Chemical_table_file) files and [.csv](https://en.wikipedia.org/wiki/Comma-separated_values) databases useful basic classes to create beautiful chemistry related animations such as a Periodic Table or 2d and 3d chemical structures.
 
-Also, manim-Chemistry will try to do as much things from scratch as possible. That means I will also avoid using libraries such as [Mendeleev](https://mendeleev.readthedocs.io/en/stable/), [RDKit](https://www.rdkit.org/), [PyMOL](https://pymol.org/2/), [Open Babel](https://openbabel.org/wiki/Main_Page) ammong others. The reason is avoid depending on 3rd party packages that might need intensive maintenance. However, the users can combine the power of those libraries with manim-Chemistry to make life easier.
+Also, manim-Chemistry will try to do as many things from scratch as possible. That means I will also avoid using libraries such as [Mendeleev](https://mendeleev.readthedocs.io/en/stable/), [RDKit](https://www.rdkit.org/), [PyMOL](https://pymol.org/2/), [Open Babel](https://openbabel.org/wiki/Main_Page) among others. The reason is to avoid depending on 3rd party packages that might need intensive maintenance. However, users can combine the power of those libraries with manim-Chemistry to make life easier.
 
-This project is still a work in progress and there is no date for a final realease yet.
+This project is still a work in progress and there is no date for a final release yet.
 
 # What can manim-Chemistry do right now?
 
