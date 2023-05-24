@@ -226,13 +226,18 @@ class MElementObject(VGroup):
 
         return VGroup(frame_rectangle, symbol_text, name_text, atomic_number_text)
     
-    def ElementData(self, atomic_number, **kwargs):
+    def ElementData(atomic_number, **kwargs):
+        atomic_number = atomic_number
+        atomic_mass = ElementDict[atomic_number]['AtomicMass']
+        element_name = ElementDict[atomic_number]['Element']
+        element_symbol = ElementDict[atomic_number]['Symbol']
+        fill_colors = ElementDict[atomic_number]['Color']
         return MElementObject(
-            atomic_number = int(atomic_number),
-            atomic_mass=int(ElementDict[atomic_number]['AtomicMass']),
-            element_name = str(ElementDict[atomic_number]['Element']),
-            element_symbol = str(ElementDict[atomic_number]['Symbol']),
-            fill_colors = [ElementDict[atomic_number]['Color'], WHITE]
+            atomic_number,
+            atomic_mass,
+            element_name,
+            element_symbol,
+            fill_colors,
         )
     #def from_csv_file_data(filename, atomic_number, **kwargs):
         # TODO: Add option to set manually colors.
