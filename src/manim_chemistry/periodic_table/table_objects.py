@@ -134,6 +134,7 @@ ElementDict = {
     117: {'Element': 'Tennessine', 'Symbol': 'Ts', 'AtomicMass': 295.0, 'Color': '#eb0026'},
     118: {'Element': 'Oganesson', 'Symbol': 'Og', 'AtomicMass': 294.0, 'Color': '#eb0026'}
     }
+
 class MElementObject(VGroup):
     def __init__(
         self,
@@ -225,40 +226,27 @@ class MElementObject(VGroup):
         atomic_number_text.shift(shifting_ammount * RIGHT)
 
         return VGroup(frame_rectangle, symbol_text, name_text, atomic_number_text)
-    
+
+       
     def ElementData(atomic_number, **kwargs):
-        atomic_number = atomic_number
-        atomic_mass = ElementDict[atomic_number]['AtomicMass']
-        element_name = ElementDict[atomic_number]['Element']
-        element_symbol = ElementDict[atomic_number]['Symbol']
-        fill_colors = ElementDict[atomic_number]['Color']
+         # TODO: Add option to set manually colors.
+        # TODO: Set language.
+        # TODO: Create a table that adds this data in a prettier way.    
         return MElementObject(
-            atomic_number,
-            atomic_mass,
-            element_name,
-            element_symbol,
-            fill_colors,
+            atomic_number = atomic_number,
+            atomic_mass = ElementDict[atomic_number]['AtomicMass'],
+            element_name = ElementDict[atomic_number]['Element'],
+            element_symbol = ElementDict[atomic_number]['Symbol'],
+            fill_colors = [ElementDict[atomic_number]['Color'], WHITE],
         )
-    #def from_csv_file_data(filename, atomic_number, **kwargs):
-        # TODO: Add option to set manually colors.
-        # TODO: Create a table that adds this data in a prettier way.
-        #df = pd.read_csv(filename)
-        #element = df.loc[df["AtomicNumber"] == atomic_number].squeeze().to_dict()
-
-        #return MElementObject(
-            #atomic_number=atomic_number,
-            #atomic_mass=element.get("AtomicMass"),
-            #element_name=element.get("Name"),
-            #element_symbol=element.get("Symbol"),
-            #fill_colors=[element.get("Color"), WHITE],
-       # )
-
 
 class PeriodicTable(VGroup):
-    # TODO Change to english database
-    def __init__(self, data_file, *vmobjects, **kwargs):
+    # TODO: Option to change coloring of sections of periodic table.
+    # TODO: Choose language.
+    # TODO: Change to english database
+    def __init__(self, *vmobjects, **kwargs):
         VGroup.__init__(self, *vmobjects, **kwargs)
-        self.data_file = data_file
+        self.ElementDict = ElementDict
         self.table = self.add_elements()
 
         self.add(self.table)
@@ -271,9 +259,7 @@ class PeriodicTable(VGroup):
         table = VGroup()
         for element, position in positions.items():
             new_position = np.multiply(mult_array, np.array(position))
-            new_element = MElementObject.from_csv_file_data(
-                self.data_file, element
-            ).move_to(new_position)
+            new_element = MElementObject.ElementData(element).move_to(new_position)
 
             table.add(new_element)
 
