@@ -226,7 +226,7 @@ class MElementObject(VGroup):
 
         return VGroup(frame_rectangle, symbol_text, name_text, atomic_number_text)
     
-    def ElementData(atomic_number, **kwargs):
+    def ElementData(self, atomic_number, **kwargs):
         return MElementObject(
             atomic_number = int(atomic_number),
             atomic_mass=int(ElementDict[atomic_number]['AtomicMass']),
