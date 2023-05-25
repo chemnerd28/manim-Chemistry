@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 class Element:
     def __repr__(self) -> str:
         return f"Element {self.atomic_number}: {self.name} ({self.symbol})"
