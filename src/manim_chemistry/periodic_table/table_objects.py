@@ -111,8 +111,7 @@ class MElementObject(VGroup):
 
        
     def ElementData(atomic_number, language, **kwargs):
-         # TODO: Add option to set manually colors.
-        # TODO: Set language.
+        # TODO: Add option to set manually colors.
         # TODO: Create a table that adds this data in a prettier way.
         if language == "English":
             language = ed.English
@@ -137,7 +136,6 @@ class MElementObject(VGroup):
 
 class PeriodicTable(VGroup):
     # TODO: Option to change coloring of sections of periodic table.
-    # TODO: Choose language.
     # TODO: Change to english database
     def __init__(self, language="English", *vmobjects, **kwargs):
         self.language = language

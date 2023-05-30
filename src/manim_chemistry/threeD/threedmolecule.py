@@ -12,14 +12,13 @@ from .threedbond import ThreeDBond
 
 class ThreeDMolecule(OpenGLGroup):
     """
-    Uses a .mol file, a data source csv, ThreeDAtoms
+    Uses a .mol file, ThreeDAtoms
     and ThreeDBonds to create a ThreeDMolecule.
     """
     def __init__(
         self,
         atoms_dict,
         bonds_dict,
-        source_csv,
         add_bonds=True,
         add_atoms=True,
         *mobjects,
@@ -27,8 +26,7 @@ class ThreeDMolecule(OpenGLGroup):
     ):
         self.atoms_dict = atoms_dict
         self.bonds_dict = bonds_dict
-        self.source_csv = source_csv
-        self.atoms = self.get_atoms_from_csv()
+        self.atoms = self.get_atoms_from_ED()
         self.bonds = self.get_bonds()
         super().__init__(**kwargs)
         self.add(*mobjects)
@@ -38,17 +36,15 @@ class ThreeDMolecule(OpenGLGroup):
             self.add(self.atoms)
         self.move_to(ORIGIN)
 
-    def get_atoms_from_csv(self):
+    def get_atoms_from_ED(self):
         atoms = OpenGLGroup()
         for _, atom in self.atoms_dict.items():
-            try:
-                element = Element.from_csv_file(
-                    self.source_csv, atom.get("element")
-                )  # TODO: Make the file an option
-                atoms.add(ThreeDAtom(element, atom.get("coords")))
-            except:
-                import ipdb
-                ipdb.set_trace()
+            #try:
+            element = Element.from_ED(atom.get("element"))  
+            atoms.add(ThreeDAtom(element, atom.get("coords")))
+            #except:
+            #    import ipdb
+            #    ipdb.set_trace()
             
 
         return atoms
@@ -68,6 +64,6 @@ class ThreeDMolecule(OpenGLGroup):
 
         return bonds
 
-    def from_mol_file(filename, source_csv):
+    def from_mol_file(filename):
         atoms, bonds = mol_parser(file=filename)
-        return ThreeDMolecule(atoms_dict=atoms, bonds_dict=bonds, source_csv=source_csv)
+        return ThreeDMolecule(atoms_dict=atoms, bonds_dict=bonds)

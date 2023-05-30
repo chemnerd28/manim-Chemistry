@@ -13,6 +13,7 @@
 - [Made with manimChemistry](#made-with-manimchemistry)
 
 # Installation.
+This fork is maintained by Chemnerd28 (contact details at bottom); however, most updates will hopefully simply be merged into manim-Chemistry. The installation instructions for the original is below:
 
 You can install via pip:
 
@@ -35,7 +36,7 @@ git clone https://github.com/UnMolDeQuimica/manim-Chemistry.git
 cd manim-Chemistry 
 python -m pip install -e .
 ```
-
+If you would like to work on this fork specifically, you can clone this repo and install directly following the same git clone instructions above, albeit with the correct URL (or SSH, etc.).
 
 # What is manim-Chemistry?
 
@@ -87,7 +88,7 @@ from manim_chemistry import *
 
 class TwoDMoleculeScene(Scene):
    def construct(self):
-        morphine = MMoleculeObject.from_mol_file("morphine.mol")
+        morphine = MMoleculeObject.from_mol_file("morphine.mol", add_bonds_numbering = True)
         self.add(morphine)
 ```
 
@@ -114,12 +115,11 @@ Now we are talking!
 
 ## Create 3D molecule:
 
-Creating a 3D molecule requires a bit more effort. We need two things:
+Creating a 3D molecule is very similar to a 2D molecule. A .mol file is needed, specifically one with 3D information involved. If a 2D .mol file is passed as the argument, the structure will appear, but will be an incorrect 2D ball-and-stick model. Here is the example morphine.mol and morphine3D.mol to show this difference:
+![plot](/examples/examples_assets/3Drender2Dmorphinemol.png)
+![plot](/examples/examples_assets/3Drender3Dmorphinemol.png)
 
-1. A .mol file (like before)
-2. A csv data file with data for your atoms. You can find an example inside the examples folder called "Elementos.csv". 
-
-The .mol will be parsed and the .csv will tell manim-Chemistry some data, specially the color. Using the same file as before we can create a 3D structure for morphine:
+The .mol will be parsed for appropriate spatial data and produce an image. 
 
 ```
 from manim import *
@@ -127,7 +127,7 @@ from manim_chemistry import *
 
 class Draw3DMorphine(ThreeDScene):
     def construct(self):
-        three_d_morphine = ThreeDMolecule.from_mol_file("morphine.mol", "Elementos.csv")
+        three_d_morphine = ThreeDMolecule.from_mol_file("morphine3d.mol")
         self.add(three_d_morphine)
         self.wait()
 ```
@@ -138,13 +138,14 @@ To be able to run this you need to run manim using opengl as renderer:
 
 Here is the result!
 
-![plot](/examples/examples_assets/Draw3DMorphine_ManimCE_v0.17.3.png)
+![plot](/examples/examples_assets/3Drender3Dmorphinemol.png)
 
-As you can see, the coloring is defined in the "Elementos.csv" file, but you can make your own source file to customize colors!
+Currently, color is predefined by the `English` dictionary in `ED.py`, but future customization will be developed.
 
 
 ## Create a periodic table:
-Like before, we need a source file to draw everything. Again, feel free to make your own from a copy of "Elementos.csv"
+Currently, the periodic table and any specific element frames can be in the following languages: English, Spanish, French, and German. 
+Feel free to suggest other languages to add if you want them!
 
 You can create the frame for an element using:
 
@@ -154,7 +155,7 @@ from manim_chemistry import *
 
 class DrawCarbonElement(Scene):
     def construct(self):
-        carbon = MElementObject.from_csv_file_data(filename="Elementos.csv", atomic_number=6)
+        carbon = MElementObject.ElementData(atomic_number=6, language = "English")
         self.add(carbon)
 ```
 
@@ -163,7 +164,7 @@ And there you have it!
 ![plot](/examples/examples_assets/DrawCarbonElement_ManimCE_v0.17.3.png)
 
 
-To make the whole periodic table you need data for every element inside that data source file. Elementos.csv already has it, so you just have to copy it and adapt to your needs. Using the cpk coloring and the following code we get that beautiful periodic table:
+To make the whole periodic table, you simply need to specify which language you want to print. Using the cpk coloring from the dictionary inside ed.py and the following code, we get that beautiful periodic table:
 
 ```
 from manim import *
@@ -171,7 +172,7 @@ from manim_chemistry import *
 
 class DrawPeriodicTable(Scene):
     def construct(self):
-        self.add(PeriodicTable(data_file="Elementos.csv"))
+        self.add(PeriodicTable(language = "English"))
 ```
 
 ![plot](/examples/examples_assets/DrawPeriodicTable_ManimCE_v0.17.3.png)
@@ -199,7 +200,7 @@ One again you need to use opengl as renderer:
 
 ## Making Bohr diagrams:
 
-Bohr diagrams are very outdated, but drawing them might be usefull to communicate certain ideas. Here all you have to do is set the number of protons, electrons and neutrons and you will get a nice diagram:
+Bohr diagrams are very outdated, but drawing them might be useful to communicate certain ideas. Here all you have to do is set the number of protons, electrons and neutrons and you will get a nice diagram:
 
 ```
 from manim import *
@@ -322,7 +323,11 @@ https://www.youtube.com/watch?v=L7OXe94_WmA
 
 
 # How to contact
-You can open issues and pull requests, but if you want to contact me directly you can go to:
+Feel free to bugs, open issues and pull requests, or just contribute! If you want to contact me directly, I am in the Manim Community Discord (Chemnerd#4670, this will be changing soon with Discord's update), as well as on Twitter. 
+- Twitter: https://twitter.com/Chemnerd28
+
+
+Original creator of the manim-Chemistry plugin can be found here:
 - Email: unmoldequimica@gmail.com
 - YouTube: https://www.youtube.com/@unmoldequimica
 - Twitter: https://twitter.com/unmoldequimica
