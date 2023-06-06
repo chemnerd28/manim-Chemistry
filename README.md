@@ -155,7 +155,7 @@ from manim_chemistry import *
 
 class DrawCarbonElement(Scene):
     def construct(self):
-        carbon = MElementObject.ElementData(atomic_number=6, language = "English")
+        carbon = MElementObject.ElementData(atomic_number=6, language = "Spanish")
         self.add(carbon)
 ```
 
