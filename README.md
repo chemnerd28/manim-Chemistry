@@ -163,8 +163,24 @@ And there you have it!
 
 ![plot](/examples/examples_assets/DrawCarbonElement_ManimCE_v0.17.3.png)
 
+If you would like to produce a section of the periodic table, you can use the parameter `section` to only generate that section of the periodic table. The following sections are available:
+* s-block; p-block; d-block; f-block 
+* alkali; alkaline; transition metals (same result as d-block); boron group; carbon group; pnictogens; chalcogens; halogens; noble gasses
+* lanthanides; actinides, metalloids; nonmetals.
 
-To make the whole periodic table, you simply need to specify which language you want to print. Using the cpk coloring from the dictionary inside ed.py and the following code, we get that beautiful periodic table:
+```
+from manim import *
+from manim_chemistry import *
+
+class DrawPeriodicTable(Scene):
+    def construct(self):
+        self.add(PeriodicTable(section = 's-block', language = 'English'))
+```
+Note: At this time, each section would be rendered on top of each other. Therefore, you should move each section if you want multiple sections at the same time. If you want any other sections, just raise an issue.
+
+![plot](/examples/examples_assets/sblockexample.png)
+
+To make the whole periodic table, you simply need to specify which language you want to print (no `section` parameter). Using the cpk coloring from the dictionary inside ed.py and the following code, we get that beautiful periodic table:
 
 ```
 from manim import *

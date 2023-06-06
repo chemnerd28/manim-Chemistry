@@ -10,7 +10,6 @@ This lists things that should be added in the near future to make this library u
 * [ ] Add an option for coloring to 2d molecules (right after using element for 2d atoms this can be easily implemented).
 * [ ] For God's sake, refactor 2d molecule logic.
 * [ ] Document everything.
-* [ ] Add proper .csv databases.
 * [ ] Add references (bibliography) for stuff like the databases. Mendeleev might be useful for this.
 * [ ] Type the functions.
 * [ ] Create a proper TODO tree.

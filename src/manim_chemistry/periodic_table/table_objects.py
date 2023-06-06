@@ -137,7 +137,8 @@ class MElementObject(VGroup):
 class PeriodicTable(VGroup):
     # TODO: Option to change coloring of sections of periodic table.
     # TODO: Change to english database
-    def __init__(self, language="English", *vmobjects, **kwargs):
+    def __init__(self, section = "all", language="English", *vmobjects, **kwargs):
+        self.section = section
         self.language = language
         VGroup.__init__(self, *vmobjects, **kwargs)
         self.table = self.add_elements()
@@ -145,6 +146,83 @@ class PeriodicTable(VGroup):
 
     def add_elements(self):
         positions = self.elements_position_dict()
+        alkali = [3,11,19,37,55,87]
+        alkaline= [4,12,20,38,56,88]
+        pnictogens = [7,15,33,51,83,115]
+        chalcogens = [8,16,34,52,84,116]
+        halogens = [9,17,35,53,85,117]
+        noble = [2,10,18,36,54,86,118]
+        boron = [5,13,31,49,81,113]
+        carbon = [6,14,32,50,82,114]
+        metalloids = [5,14,32,33,51,52,85]
+        nonmetals = [6,7,8,9,15,16,17,34,35,53]
+
+        #this is ugly, but it works.
+        if self.section == 'd-block' or self.section == 'transition metals':
+            positions = {
+                k:v for k,v in positions.items() if 21<=k<=30 or 39<=k<=48 or 72<=k<=80 or 104<=k<=112 
+            }
+        if self.section == 's-block':
+            positions = {
+                k:v for k,v in positions.items() if k == 1 or k ==2 or k in alkali or k in alkaline
+            }
+        if self.section == 'p-block':
+            positions = {
+                k:v for k,v in positions.items() if k in boron or k in carbon or k in pnictogens or k in chalcogens or k in halogens or k in noble
+            }
+        if self.section == 'f-block':
+            positions = {
+                k:v for k,v in positions.items() if 57<=k<=71 or 89<=k<=103
+            }
+        if self.section == 'alkali':
+            positions = {
+                k:v for k,v in positions.items() if k in alkali
+            }
+        if self.section == 'alkaline':
+            positions = {
+                k:v for k,v in positions.items() if k in alkaline
+            }
+        if self.section == 'pnictogens':
+            positions = {
+                k:v for k,v in positions.items() if k in pnictogens 
+            }
+        if self.section == 'chalcogens':
+            positions = {
+                k:v for k,v in positions.items() if k in chalcogens 
+            }
+        if self.section == 'halogens':
+            positions = {
+                k:v for k,v in positions.items() if k in halogens
+            }
+        if self.section == 'boron group':
+            positions = {
+                k:v for k,v in positions.items() if k in boron
+            }
+        if self.section == 'carbon ':
+            positions = {
+                k:v for k,v in positions.items() if k in carbon
+            }
+        if self.section == 'noble gasses':
+            positions = {
+                k:v for k,v in positions.items() if k in noble
+            }
+        if self.section == 'lanthanides':
+            positions = {
+                k:v for k,v in positions.items() if 57<=k<=71
+            }
+        if self.section == 'actinides':
+            positions = {
+                k:v for k,v in positions.items() if 89<=k<=103
+            }
+        if self.section == 'metalloids':
+            positions = {
+                k:v for k,v in positions.items() if k in metalloids
+            }
+        if self.section == 'nonmetals':
+            positions = {
+                k:v for k,v in positions.items() if k in nonmetals
+            }
+
         base_element = MElementObject()
         mult_array = np.array([base_element.get_width(), -base_element.get_height(), 0])
 
@@ -231,7 +309,7 @@ class PeriodicTable(VGroup):
             68: [13, 7.5, 0],
             69: [14, 7.5, 0],
             70: [15, 7.5, 0],
-            71: [2, 5, 0],
+            71: [16, 7.5, 0],
             72: [3, 5, 0],
             73: [4, 5, 0],
             74: [5, 5, 0],
@@ -263,7 +341,7 @@ class PeriodicTable(VGroup):
             100: [13, 8.5, 0],
             101: [14, 8.5, 0],
             102: [15, 8.5, 0],
-            103: [2, 6, 0],
+            103: [16, 8.5, 0],
             104: [3, 6, 0],
             105: [4, 6, 0],
             106: [5, 6, 0],
